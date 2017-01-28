@@ -36,18 +36,15 @@
         if(empty($usersToFollow)){
           echo 'You follow all users here!';
         }else{
-          echo 'Who to follow:';
-          echo '<ul>';
           foreach($usersToFollow as $row) {
-            echo '<li>'.$row["user_email"].'</li>'.
-            '<form method="post" action="follow.php">
-              <input id="tweet" type="hidden" name="followee" value='.$row["user_id"].'> 
-              <br/>
-              <br/>          
-              <input type="submit" value="Follow" name="btn-follow" class="tweetbutton"s>
-            </form>';
+            echo '<div class="tweet_message"><img class="user-two" src="https://s-media-cache-ak0.pinimg.com/236x/e4/fa/53/e4fa53ab96509501880f20faeac2556a.jpg">'.$row["user_email"].
+        '<form method="post" action="follow.php">
+          <input id="tweet" type="hidden" name="followee" value='.$row["user_id"].'> 
+          <br/>
+          <br/>          
+          <input type="submit" value="Follow" name="btn-follow" class="tweetbutton"s>
+        </form></div><hr class="style-two"/>';
           }
-          echo '</ul>';
         }
           
       ?>

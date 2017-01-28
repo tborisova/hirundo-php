@@ -31,7 +31,7 @@
 ?>
 
 
-<img class="user one" src="https://s-media-cache-ak0.pinimg.com/236x/e4/fa/53/e4fa53ab96509501880f20faeac2556a.jpg">
+<img class="user one" src=<?php echo $userRow['image_url']?>>
 <div id="user-info">
   <p>
   Tweets <a href="user_profile.php"><?php echo $count_of_tweets['count'] ?></a>

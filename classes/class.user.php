@@ -20,21 +20,18 @@ class USER
 		return $stmt;
 	}
 	
-	public function register($uname,$umail,$upass)
+	public function register($array, $upass)
 	{
+		echo $array;
 		try
 		{
 			$new_password = password_hash($upass, PASSWORD_DEFAULT);
-			
-			$stmt = $this->conn->prepare("INSERT INTO users(user_name,user_email,user_pass) 
-		                                               VALUES(:uname, :umail, :upass)");
-												  
-			$stmt->bindparam(":uname", $uname);
-			$stmt->bindparam(":umail", $umail);
-			$stmt->bindparam(":upass", $new_password);										  
-				
-			$stmt->execute();	
-			
+			$stmt = $this->conn->prepare("INSERT INTO users(user_name, user_email, user_pass,
+																	  description, address, website, image_url) 
+		                                VALUES(:uname, :umail, :upass, :description, 
+		                                :address, :website, :image_url)");
+			$result = array_merge($array, array(":upass" => $new_password));
+			$stmt->execute($result);
 			return $stmt;	
 		}
 		catch(PDOException $e)

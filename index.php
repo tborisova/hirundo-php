@@ -28,7 +28,7 @@ if(isset($_POST['btn-login']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Coding Cage : Login</title>
+<title>Login</title>
 <link rel="stylesheet" href="css/style.css?version=10" type="text/css"  />
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/application.js"></script>
@@ -57,7 +57,6 @@ if(isset($_POST['btn-login']))
                   </fieldset>
                   <fieldset id="actions">
                     <input type="submit" id="submit" value="Log in" name="btn-login">
-                    <label><input type="checkbox" checked="checked"> Keep me signed in</label>
                   </fieldset>
                 </form>
               </div>                     
