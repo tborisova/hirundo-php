@@ -59,13 +59,18 @@
             </div>
 
             <div class="inputs">
-              <label for="name">Password</label>
-              <input type="text" name="password"> 
+              <label for="name">Current Password</label>
+              <input type="text" name="old_password"> 
+            </div>
+
+            <div class="inputs">
+              <label for="name">New Password</label>
+              <input type="text" name="new_password"> 
             </div>
             
             <div class="inputs">
-              <label for="name">Password Confirmation</label>
-              <input type="text" name="password_confirmation"> 
+              <label for="name">New Password Confirmation</label>
+              <input type="text" name="new_password_confirmation"> 
             </div>
           </fieldset>
           <fieldset id="actions">

@@ -38,7 +38,7 @@ if(isset($_POST['btn-signup']))
 	{
 		try
 		{
-			$stmt = $user->runQuery("SELECT user_name, user_email FROM users WHERE user_email=:umail");
+			$stmt = $user->runQuery("SELECT user_email FROM users WHERE user_email=:umail");
 			$stmt->execute(array(':umail'=>$umail));
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
 				

@@ -20,7 +20,7 @@ class USER
 		return $stmt;
 	}
 	
-	public function register($array, $upass)
+	public function register($params, $upass)
 	{
 		echo $array;
 		try
@@ -41,7 +41,7 @@ class USER
 	}
 	
 	
-	public function doLogin($uname,$umail,$upass)
+	public function doLogin($uname, $umail, $upass)
 	{
 		try
 		{
@@ -113,6 +113,32 @@ class USER
 		$stmt->execute(array(":followee_id" => $followee_id, ":follower_id" => $_SESSION['user_session']));	
 			
 		return $stmt;	
+	}
+
+	public function update_profile($user_id, $params, $password)
+	{
+
+		$stmt = $this->conn->prepare("select count(user_id) from users where user_email = :email and user_id != :user_id");
+
+		$stmt->execute(array(":email" => $params[":email"], ":user_id" => $user_id));
+
+    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if(empty($result)){
+			$new_password = password_hash($password, PASSWORD_DEFAULT);
+
+	    $stmt = $this->conn->prepare("update users set user_name = :user_name,
+																		user_email = :user_email, user_pass = :user_pass,
+																	  description = :description, address = :address,
+																	  website = :website, image_url = :image_url,
+																	  user_pass = :password
+																	  where user_id = :user_id");
+
+			$stmt->execute(array_merge($params, array(":password" => $new_password)));
+			return [];
+    }else{
+    	return $errors[] = "User with that email already exists!";
+    }
 	}
 }
 ?>
