@@ -79,7 +79,6 @@ ALTER TABLE `tweets`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `user_email` (`user_email`);
 
 --

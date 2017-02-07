@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('classes/class.user.php');
+require_once("classes/class.db_operations.php");
 
 $user = new USER();
 $user_id = $_SESSION['user_session'];
@@ -24,5 +25,10 @@ if(isset($_POST['btn-update-profile'])){
                                                   ":image_url" => $image_url),
                                   $new_password);
 
-}
+  }
+  // $errors[] = "FDSFdsfds";
+  // foreach($errors as $error){
+  //   echo $error;
+  // };
+  $user->redirect('account_settings.php');
 ?>

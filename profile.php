@@ -18,7 +18,8 @@
 
   $follows = $db_operation->executeQuery("SELECT count(id) as count FROM follows
                                           WHERE follower_id=:follower_id AND followee_id=:followee_id", 
-                            array(":followee_id" => $user_id, "follower_id" => $_SESSION['user_session']))
+                            array(":followee_id" => $user_id, "follower_id" => $_SESSION['user_session']));
+
 ?>
 
 <!DOCTYPE HTML>
@@ -27,7 +28,10 @@
   <body>
     <?php include('navigation.html');?>
     <aside id="aside-left">
-        <?php include('user_info.php');?>     
+        <?php
+          // $parent_page = __FILE__;
+          include('user_info.php');
+        ?>     
     </aside>
     <section>
         <form method="post" action="tweet.php">

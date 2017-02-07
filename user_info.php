@@ -5,12 +5,12 @@
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
 
-  if(isset($parent_page) && (strpos($parent_page, 'home.php') !== false || strpos($parent_page, 'account_settings.php') !== false || strpos($parent_page, 'followees.php') !== false || strpos($parent_page, 'who_to_follow.php') !== false)){
+  if(isset($parent_page) && (strpos($parent_page, 'home.php') !== false || strpos($parent_page, 'account_settings.php') !== false || strpos($parent_page, 'followees.php') !== false || strpos($parent_page, 'who_to_follow.php') !== false  || strpos($parent_page, 'profile.php') != false)){
     $user_id = $_SESSION['user_session'];
   }else{
     $user_id = $_GET['user_id'];
   }
-  
+
   $db_operation = new DB_OPERATION();
 
   $userRow = $db_operation->executeQuery("SELECT * 
@@ -34,17 +34,20 @@
 <img class="user one" src=<?php echo $userRow['image_url']?>>
 <div id="user-info">
   <p>
-  Tweets <a href="user_profile.php"><?php echo $count_of_tweets['count'] ?></a>
+  Tweets <a href="tweets_from_user.php?user_id=<?php echo $user_id?>"><?php echo $count_of_tweets['count'] ?></a>
   </p>
   <p>
-  Follows <a href="tweets_from_user.php"><?php echo $count_of_followees['count'] ?> people</a>
+  Follows <a href="following.php?user_id=<?php echo $user_id?>"><?php echo $count_of_followees['count'] ?> people</a>
   </p>
   <p><?php echo $userRow['user_email'];?></p>
   <p><?php echo $userRow['description'];?></p>
   <p>From: <?php echo $userRow['address'];?></p>
   <p>WebSite: <?php echo $userRow['website'];?></p>
   <p>Joined at: <?php echo  date("jS F, Y", strtotime($userRow['created_at']));?></p>
-  <a href="tweet_to.php/<?php echo $user_id?>" class="tweetbutton" title="Tweet to @jsnwr">Tweet to <?php echo $userRow['user_name']?></a>
+  <!-- <form action="message.php" method="post" onsubmit="target_popup(this)">
+      <textarea name="message" placeholder="Tweet something" class="tweet"></textarea>
+      <input type="submit" class="button" value="Tweet" name="btn-tweet">
+  </form> -->
   <?php
     if(isset($follows['count'])){
       if($follows == '1'){

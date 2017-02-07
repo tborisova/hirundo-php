@@ -118,23 +118,23 @@ class USER
 	public function update_profile($user_id, $params, $password)
 	{
 
-		$stmt = $this->conn->prepare("select count(user_id) from users where user_email = :email and user_id != :user_id");
+		$stmt = $this->conn->prepare("select count(user_id) as count from users where user_email = :email and user_id != :user_id");
 
 		$stmt->execute(array(":email" => $params[":email"], ":user_id" => $user_id));
 
-    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 
-    if(empty($result)){
+    if(empty($result['count'])){
 			$new_password = password_hash($password, PASSWORD_DEFAULT);
 
-	    $stmt = $this->conn->prepare("update users set user_name = :user_name,
-																		user_email = :user_email, user_pass = :user_pass,
+	    $stmt = $this->conn->prepare("update users set user_name = :uname,
+																		user_email = :email, user_pass = :password,
 																	  description = :description, address = :address,
 																	  website = :website, image_url = :image_url,
 																	  user_pass = :password
 																	  where user_id = :user_id");
 
-			$stmt->execute(array_merge($params, array(":password" => $new_password)));
+			$stmt->execute(array_merge($params, array(":password" => $new_password, ":user_id" => $user_id)));
 			return [];
     }else{
     	return $errors[] = "User with that email already exists!";

@@ -28,5 +28,15 @@ class DB_OPERATION
     
     return $result;
   }
+
+
+  public function updateQuery($sql, $array){
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($array);
+    
+    // $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    return;
+  }
 }
 ?>

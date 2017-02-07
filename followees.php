@@ -13,7 +13,7 @@
                                 array(":user_id"=>$user_id))[0];
 
 
-  $followees = $db_operation->executeQuery("SELECT user_id, user_email 
+  $followees = $db_operation->executeQuery("SELECT user_id, user_email, image_url 
                                           from users join follows on 
                                           user_id = followee_id where follower_id = :user_id", 
                                 array(":user_id"=>$user_id));
@@ -35,7 +35,7 @@
       <?php
       foreach ($followees as $row) {
         echo 
-        '<div class="tweet_message"><img class="user-two" src="https://s-media-cache-ak0.pinimg.com/236x/e4/fa/53/e4fa53ab96509501880f20faeac2556a.jpg">'.$row["user_email"].
+        '<div class="tweet_message"><a href=profile.php?user_id='.$row['user_id'].'><img class="user-three" src='.$row["image_url"].'></a><i>'.$row["user_email"].
         '<form method="post" action="unfollow.php">
           <input id="tweet" type="hidden" name="followee" value='.$row["user_id"].'> 
           <br/>
