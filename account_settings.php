@@ -52,13 +52,19 @@
 
             <h2 class="panel-title">Edit Account Information</h2>
 
-            <div class="errors">
-              <ul>
-                <?php foreach($errors as $error)
-                  echo '<li>'.$error.'</li>'
-                ?>
-              </ul>
-            </div>
+            <?php
+
+              if(isset($errors) && !empty($errors)){
+                echo '<div class="errors">
+                        <ul>';
+                foreach($errors as $error){
+                  var_dump($userRow);
+                  echo '<li>'.$error.'</li>';
+                }
+                echo '</ul>
+                </div>';
+              }
+            ?>
 
             <form method="post" id="login-form" action="account_settings.php">
 

@@ -9,9 +9,9 @@
 
   $db_operation = new DB_OPERATION();
 
-  $userRow = $db_operation->executeQuery("SELECT user_email
+  $userRow = $db_operation->executeQuery("SELECT *
                                 FROM users WHERE user_id=:user_id",
-                                array(":user_id"=>$user_id));
+                                array(":user_id"=>$user_id))[0];
 
 ?>
 
@@ -20,5 +20,7 @@
   <script src="js/jquery-3.1.1.min.js"></script>
   <script src="js/application.js"></script>
   <meta charset="UTF-8">
-  <title>welcome - <?php echo $userRow['user_email']; ?></title>
+  <?php
+    echo '<title>Welcome .'.$userRow['user_email'].'</title>';
+  ?>
 </head>
