@@ -13,7 +13,7 @@ if(isset($_POST['btn-login']))
 	$uname = strip_tags($_POST['txt_uname_email']);
 	$umail = strip_tags($_POST['txt_uname_email']);
 	$upass = strip_tags($_POST['txt_password']);
-		
+
 	if($login->doLogin($uname,$umail,$upass))
 	{
 		$login->redirect('home.php');
@@ -21,7 +21,7 @@ if(isset($_POST['btn-login']))
 	else
 	{
 		$error = "Wrong Details !";
-	}	
+	}
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,7 +35,7 @@ if(isset($_POST['btn-login']))
 </head>
 
 <body>
-    <header id="header">      
+    <header id="header">
       <div class="container">
         <nav id="nav">
           <ul>
@@ -51,15 +51,18 @@ if(isset($_POST['btn-login']))
               </a>
               <div id="login-content" class="hidden">
                 <form method="post" id="login-form">
-                  <fieldset id="inputs">
-                    <input id="username" type="email" name="txt_uname_email" placeholder="Your email address" required> 
-                    <input id="password" type="password" name="txt_password" placeholder="Password" required>
-                  </fieldset>
-                  <fieldset id="actions">
+
+                    <div class="inputs">
+											<input id="username" type="email" name="txt_uname_email" placeholder="Your email address" required>
+                    </div>
+										<div class="inputs">
+											<input id="password" type="password" name="txt_password" placeholder="Password" required>
+										</div>
+
                     <input type="submit" id="submit" value="Log in" name="btn-login">
-                  </fieldset>
+                
                 </form>
-              </div>                     
+              </div>
             </li>
             <li id="signup">
               <a href="sign-up.php">Sign up</a>
@@ -76,7 +79,7 @@ if(isset($_POST['btn-login']))
                     ?>
                     <div class="alert" id="alert">
                         <div>
-                        <span class="closebtn" id="closebtn">&times;</span> 
+                        <span class="closebtn" id="closebtn">&times;</span>
                             <?php echo $error; ?>
                         </div>
                     </div>
@@ -92,5 +95,5 @@ if(isset($_POST['btn-login']))
         </div>
         </center>
     </div>
-</body>    
+</body>
 </html>
