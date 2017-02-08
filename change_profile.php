@@ -26,7 +26,7 @@ if(isset($_POST['btn-update-profile'])){
                                   $new_password);
 
   }
-  // $errors[] = "FDSFdsfds";
+  $error[] = "FDSFdsfds";
   // foreach($errors as $error){
   //   echo $error;
   // };

@@ -49,12 +49,7 @@
           }
         ?>
       </section>
-
-      <aside class="column-right">
-        <div class="panel">
-          Hello from the right side!
-        </div>
-      </aside>
+      <?php include('who_to_follow.php');?>
     </main>
   </body>
 </html>

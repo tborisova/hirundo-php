@@ -20,6 +20,5 @@
   <script src="js/jquery-3.1.1.min.js"></script>
   <script src="js/application.js"></script>
   <meta charset="UTF-8">
-  <?php var_dump($userRow); # debuging ?>
   <title>welcome - <?php echo $userRow['user_email']; ?></title>
 </head>

@@ -26,9 +26,15 @@ class Message
     $stmt = $this->conn->prepare("
       INSERT INTO tweets (USER_ID, CONTENT)
       VALUES(:user_id, :content)");
-    $stmt->bindParam(':user_id', $this->user_id);
-    $stmt->bindParam(':content', $content);
-    $stmt->execute();
+    $stmt->execute(array(":user_id" => $this->user_id, ":content" => $content));
+  }
+
+
+  public function addPrivateMessage($content, $recepeint_id){
+    $stmt = $this->conn->prepare("
+      INSERT INTO messages (receiver_id, sender_id, message)
+      VALUES(:receiver_id, :sender_id, :message)");
+    $stmt->execute(array(":message" => $content, ":sender_id" => $this->user_id, ":receiver_id" => $recepeint_id));
   }
 }
 ?>

@@ -47,6 +47,7 @@
               }
             ?>
       </section>
+      <?php include('who_to_follow.php');?>
     </main>
   </body>
 </html>

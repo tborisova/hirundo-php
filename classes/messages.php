@@ -5,11 +5,7 @@
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
 
-  if(isset($_GET['user_id'])){
-    $user_id = $_GET['user_id'];
-  }else{
-    $user_id = $_SESSION['user_id'];
-  }
+  $user_id = $_SESSION['user_session'];
 
   $db_operation = new DB_OPERATION();
 
@@ -18,8 +14,16 @@
                                 array(":user_id"=>$user_id));
 
 
-  $userTweets = $db_operation->executeQuery("SELECT tweets.user_id as t_user_id, content, users.image_url, users.user_name from tweets join users on tweets.user_id=users.user_id where  tweets.user_id = :user_id order by id desc",
-                                array(":user_id"=>$user_id));
+  $receivedMessages = $db_operation->executeQuery("SELECT * from messages, 
+                                                  users.user_email as t_user_email 
+                                                  join users on messages.sender_id=users.user_id where 
+                                                  recepient_id = :user_id order by id desc",
+                                                  array(":user_id"=>$user_id));
+
+
+  $sentMessages = $db_operation->executeQuery("SELECT * from messages where 
+                                                  sender_id = :user_id order by id desc",
+                                                  array(":user_id"=>$user_id));
 ?>
 
 <!DOCTYPE HTML>
@@ -29,12 +33,14 @@
     <?php include('navigation.html');?>
 
     <main class="container">
+
       <aside class="column-left">
         <?php
-        $parent_page = __FILE__;
-        include('user_info.php');
+          $parent_page = __FILE__;
+          include('user_info.php');
         ?>
       </aside>
+
       <section class="column-center">
         <div class="panel">
           <form method="post" action="tweet.php">
@@ -42,9 +48,9 @@
             <input type="submit" class="button" value="Tweet" name="btn-tweet">
           </form>
             <?php
-              foreach ($userTweets as $row) {
+              foreach ($receivedMessages as $row) {
                 echo
-                  '<div class="tweet_message"><a href=profile.php?user_id='.$row['t_user_id'].'><img class="user-three" src='.$row["image_url"]."></a><i>".$row["user_name"].'</i> tweeted: '.$row["content"].'</div><hr class="style-two">';
+                  '<div class="tweet_message"><a href=profile.php?user_id='.$row['t_user_email'].'><img class="user-three" src='.$row["image_url"]."></a><i>".$row["user_name"].'</i> sent yo: '.$row["content"].'</div><hr class="style-two">';
               }
             ?>
         </div>

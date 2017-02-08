@@ -5,7 +5,9 @@
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
 
-  if(isset($parent_page) && (strpos($parent_page, 'home.php') !== false || strpos($parent_page, 'account_settings.php') !== false || strpos($parent_page, 'followees.php') !== false || strpos($parent_page, 'who_to_follow.php') !== false  || strpos($parent_page, 'profile.php') != false)){
+  if(isset($parent_page) && (strpos($parent_page, 'home.php') !== false || strpos($parent_page, 'account_settings.php') !== false || strpos($parent_page, 'followees.php') !== false || 
+    strpos($parent_page, 'who_to_follow.php') !== false  || strpos($parent_page, 'profile.php') != false || 
+    strpos($parent_page, 'messages.php') != false)){
     $user_id = $_SESSION['user_session'];
   }else{
     $user_id = $_GET['user_id'];
@@ -79,8 +81,11 @@
     </div>
 
     <div class="">
-
-    <button type="button" id="tweet-to" class="button button-tweet-to">Tweet to</button>
+    <?php if($_SESSION['user_session'] != $userRow['user_id']){
+      echo '<button type="button" id="tweet-to" class="button button-tweet-to">Send message</button>';
+    }
+    ?>
+   
   </div>
 
 </div>
@@ -92,10 +97,11 @@
     </button>
 
     <div class="panel-body">
-      <h2 class="panel-title">Tweet to: <small>example@email.com</small></h2>
-      <form method="post" action="tweet.php">
-        <textarea name="message" placeholder="Tweet something" class="tweet"></textarea>
-        <input type="submit" class="button button-tweet-to simple" value="Tweet now" name="btn-tweet">
+      <h2 class="panel-title">Message to: <?php echo $userRow['user_email']?></h2>
+      <form method="post" action="message.php">
+        <input type="hidden" name="recepient_id" value="<?php echo $userRow['user_id']?>">
+        <textarea name="message" placeholder="Say something" class="tweet"></textarea>
+        <input type="submit" class="button button-tweet-to simple" value="Send message" name="btn-tweet">
       </form>
     </div>
   </div>

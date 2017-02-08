@@ -5,11 +5,33 @@
   require_once("classes/class.db_operations.php");
 
   $user_id = $_SESSION['user_session'];
+  $user = new USER();
   $db_operation = new DB_OPERATION();
   $userRow = $db_operation->executeQuery("SELECT *
                                 FROM users WHERE user_id=:user_id",
                                 array(":user_id"=>$user_id))[0];
 
+
+  if(isset($_POST['btn-update-profile'])){
+    $uname = strip_tags($_POST['name']);
+    $umail = strip_tags($_POST['email']);
+    $old_password = strip_tags($_POST['old_password']);
+    $new_password = strip_tags($_POST['new_password']);  
+    $new_password_confirmation = strip_tags($_POST['new_password_confirmation']);  
+    $description = strip_tags($_POST['description']);
+    $address = strip_tags($_POST['address']);
+    $image_url = strip_tags($_POST['image_url']);
+    $website = strip_tags($_POST['website']);
+    
+    $errors[] = $user->update_profile($user_id, array(":uname" => $uname,
+                                                    ":email" => $umail,
+                                                    ":description" => $description,
+                                                    ":website" => $website,
+                                                    ":address" => $address,
+                                                    ":image_url" => $image_url),
+                                    $new_password);
+
+  }
 ?>
 
 <!DOCTYPE HTML>
@@ -32,12 +54,13 @@
 
             <div class="errors">
               <ul>
-                <li>Missing email</li>
-                <li>Missing name</li>
+                <?php foreach($errors as $error)
+                  echo '<li>'.$error.'</li>'
+                ?>
               </ul>
             </div>
 
-            <form method="post" id="login-form" action="change_profile.php">
+            <form method="post" id="login-form" action="account_settings.php">
 
 
                 <div class="inputs">
@@ -90,11 +113,10 @@
               <input type="submit" value="Update" name="btn-update-profile" class="tweetbutton">
 
             </form>
-
-
           </div>
         </div>
       </section>
+      <?php include('who_to_follow.php');?>
     </main>
   </body>
 </html>
