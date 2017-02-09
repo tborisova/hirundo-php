@@ -23,7 +23,7 @@
     $image_url = strip_tags($_POST['image_url']);
     $website = strip_tags($_POST['website']);
     
-    $errors[] = $user->update_profile($user_id, array(":uname" => $uname,
+    $errors = $user->update_profile($user_id, array(":uname" => $uname,
                                                     ":email" => $umail,
                                                     ":description" => $description,
                                                     ":website" => $website,
@@ -58,7 +58,6 @@
                 echo '<div class="errors">
                         <ul>';
                 foreach($errors as $error){
-                  var_dump($userRow);
                   echo '<li>'.$error.'</li>';
                 }
                 echo '</ul>
@@ -101,17 +100,17 @@
 
                 <div class="inputs">
                   <label for="name">Current Password</label>
-                  <input type="text" name="old_password">
+                  <input type="password" name="old_password">
                 </div>
 
                 <div class="inputs">
                   <label for="name">New Password</label>
-                  <input type="text" name="new_password">
+                  <input type="password" name="new_password">
                 </div>
 
                 <div class="inputs">
                   <label for="name">New Password Confirmation</label>
-                  <input type="text" name="new_password_confirmation">
+                  <input type="password" name="new_password_confirmation">
                 </div>
               </fieldset>
 

@@ -39,10 +39,6 @@
         <div class="panel">
             <h2 class="panel-title">Tweets from <?php echo $userRow['user_email']?></h2>
           
-            <form method="post" action="tweet.php">
-              <textarea name="message" placeholder="Tweet something" class="tweet"></textarea>
-              <input type="submit" class="button" value="Tweet" name="btn-tweet">
-            </form>
               <?php
                 foreach ($userTweets as $row) {
                   echo

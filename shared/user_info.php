@@ -50,6 +50,7 @@
       <p>
       Follows <a href="following.php?user_id=<?php echo $user_id?>"><?php echo $count_of_followees['count'] ?> people</a>
       </p>
+      <p>Name: <?php echo $userRow['user_name'];?></p>
       <p><?php echo $userRow['user_email'];?></p>
       <p><?php echo $userRow['description'];?></p>
       <p>From: <?php echo $userRow['address'];?></p>
