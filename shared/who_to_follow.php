@@ -1,6 +1,6 @@
 <?php
 
-  require_once("session.php");
+  require_once(__DIR__."/../functions/session.php");
   require_once("classes/class.user.php");
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
@@ -13,7 +13,7 @@
                                 FROM users WHERE user_id=:user_id",
                                 array(":user_id"=>$user_id))[0];
 
-  $usersToFollow = $db_operation->executeQuery("SELECT user_id, user_email from
+  $usersToFollow = $db_operation->executeQuery("SELECT user_id, user_email, image_url from
                                                 users WHERE user_id NOT
                                                 IN(SELECT followee_id from
                                                 follows where
@@ -29,8 +29,8 @@
             echo 'You follow all users here!';
           }else{
             foreach($usersToFollow as $row) {
-              echo '<div class="tweet_message"><img class="user-two" src="https://s-media-cache-ak0.pinimg.com/236x/e4/fa/53/e4fa53ab96509501880f20faeac2556a.jpg">'.$row["user_email"].
-          '<form method="post" action="follow.php">
+              echo '<div class="tweet_message"><a href=profile.php?user_id='.$row['user_id'].'><img class="user-two" src='.$row["image_url"].'></a>'.$row["user_email"].
+          '<form method="post" action="functions/follow.php">
             <input id="tweet" type="hidden" name="followee" value='.$row["user_id"].'>
             <br/>
             <br/>

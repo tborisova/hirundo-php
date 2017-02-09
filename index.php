@@ -65,7 +65,7 @@ if(isset($_POST['btn-login']))
               </div>
             </li>
             <li id="signup">
-              <a href="sign-up.php">Sign up</a>
+              <a href="sign_up.php">Sign up</a>
             </li>
           </ul>
         </nav>

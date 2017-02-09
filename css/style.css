@@ -76,7 +76,8 @@ body {
   font-size: 14px;
 }
 
-#nav ul li a:hover {
+#nav ul li a:hover,
+#nav ul li a.active {
   color: #1da1f2;
   text-decoration: underline;
   cursor: auto;

@@ -1,6 +1,6 @@
 <?php
 
-require_once('db/dbconfig.php');
+require_once(__DIR__.'/../db/dbconfig.php');
 
 class USER
 {	

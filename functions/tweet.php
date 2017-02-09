@@ -1,8 +1,9 @@
 <?php
 
   require_once("session.php");  
-  require_once("classes/class.user.php");
-  require_once("classes/class.message.php");
+  require_once(__DIR__."/../classes/class.user.php");
+  require_once(__DIR__."/../classes/class.message.php");
+
   $user_id = $_SESSION['user_session'];
   $message = new Message($user_id);
   
@@ -14,6 +15,7 @@
     }else{
       $message->addMessage($tweet);
     }
-    header("Location: home.php");
+  
+    header("Location: ".$_SERVER['HTTP_REFERER']);
   } 
 ?>

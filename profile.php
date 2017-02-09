@@ -1,5 +1,5 @@
 <?php
-  require_once("session.php");
+  require_once("functions/session.php");
   require_once("classes/class.user.php");
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
@@ -24,30 +24,35 @@
 
 <!DOCTYPE HTML>
 <html>
-  <?php include('head.php') ?>
+  <?php include('shared/head.php') ?>
   <body>
-    <?php include('navigation.html');?>
+    <?php include('shared/navigation.php');?>
 
     <main class="container">
       <aside class="column-left">
           <?php
             // $parent_page = __FILE__;
-            include('user_info.php');
+            include('shared/user_info.php');
           ?>
       </aside>
       <section class="column-center">
-          <form method="post" action="tweet.php">
-            <textarea name="message" placeholder="Tweet something to <?php echo $userRow['user_name']?>" class='tweet'></textarea>
-            <input type="submit" class="button" value="Tweet" name="btn-tweet">
-          </form>
-            <?php
-              foreach ($userTweets as $row) {
-                echo
-                  '<div class="tweet_message"><a href=profile.php?user_id='.$userRow['user_id'].'><img class="user-three" src='.$userRow["image_url"]."></a><i>".$userRow["user_name"].'</i> tweeted: '.$row["content"].'</div><hr class="style-two">';
-              }
-            ?>
+        <div class="panel">
+
+            <h2 class="panel-title">Tweets from <?php echo $userRow['user_email']?></h2>
+<!-- 
+            <form method="post" action="tweet.php">
+              <textarea name="message" placeholder="Tweet something to <?php echo $userRow['user_name']?>" class='tweet'></textarea>
+              <input type="submit" class="button" value="Tweet" name="btn-tweet">
+            </form> -->
+              <?php
+                foreach ($userTweets as $row) {
+                  echo
+                    '<div class="tweet_message"><a href=profile.php?user_id='.$userRow['user_id'].'><img class="user-three" src='.$userRow["image_url"]."></a><i>".$userRow["user_name"].'</i> tweeted: '.$row["content"].'</div><hr class="style-two">';
+                }
+              ?>
+          </div>
       </section>
-      <?php include('who_to_follow.php');?>
+      <?php include('shared/who_to_follow.php');?>
     </main>
   </body>
 </html>

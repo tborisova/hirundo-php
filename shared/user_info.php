@@ -1,6 +1,6 @@
 <?php
 
-  require_once("session.php");
+  require_once(__DIR__."/../functions/session.php");
   require_once("classes/class.user.php");
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
@@ -55,10 +55,6 @@
       <p>From: <?php echo $userRow['address'];?></p>
       <p>WebSite: <?php echo $userRow['website'];?></p>
       <p>Joined at: <?php echo  date("jS F, Y", strtotime($userRow['created_at']));?></p>
-      <!-- <form action="message.php" method="post" onsubmit="target_popup(this)">
-          <textarea name="message" placeholder="Tweet something" class="tweet"></textarea>
-          <input type="submit" class="button" value="Tweet" name="btn-tweet">
-      </form> -->
       <?php
         if(isset($follows['count'])){
           if($follows == '1'){
@@ -98,7 +94,7 @@
 
     <div class="panel-body">
       <h2 class="panel-title">Message to: <?php echo $userRow['user_email']?></h2>
-      <form method="post" action="message.php">
+      <form method="post" action="functions/message.php">
         <input type="hidden" name="recepient_id" value="<?php echo $userRow['user_id']?>">
         <textarea name="message" placeholder="Say something" class="tweet"></textarea>
         <input type="submit" class="button button-tweet-to simple" value="Send message" name="btn-tweet">

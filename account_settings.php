@@ -1,5 +1,5 @@
 <?php
-  require_once("session.php");
+  require_once("functions/session.php");
   require_once("classes/class.user.php");
   require_once("classes/class.message.php");
   require_once("classes/class.db_operations.php");
@@ -36,15 +36,15 @@
 
 <!DOCTYPE HTML>
 <html>
-  <?php include('head.php') ?>
+  <?php include('shared/head.php') ?>
   <body>
-    <?php include('navigation.html');?>
+    <?php include('shared/navigation.php');?>
 
     <main class="container">
       <aside class="column-left">
         <?php
         $parent_page = __FILE__;
-        include('user_info.php');?>
+        include('shared/user_info.php');?>
       </aside>
       <section class="column-center">
         <div class="panel">
@@ -122,7 +122,7 @@
           </div>
         </div>
       </section>
-      <?php include('who_to_follow.php');?>
+      <?php include('shared/who_to_follow.php');?>
     </main>
   </body>
 </html>
